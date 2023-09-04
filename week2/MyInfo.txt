@@ -1,2 +1,8 @@
 Megan Koczur
+<<<<<<< HEAD
 10012 
+New York, NY
+USA
+=======
+10012 
+>>>>>>> main
