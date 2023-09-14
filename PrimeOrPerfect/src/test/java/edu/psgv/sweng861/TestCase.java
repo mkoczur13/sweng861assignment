@@ -6,22 +6,20 @@ import static org.junit.jupiter.api.Assertions.*;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
+//Java imports
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-//import java.io.Writer;
-//import java.io.PrintStream;
-//import java.io.PrintWriter;
-//import java.io.StringWriter;
-
+import java.io.PrintStream;
+import java.io.StringWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+//Mockito
+import static org.mockito.Mockito.*;
 
 import edu.psgv.sweng861.PrimeOrPerfect.NumberType;
 
-/**
- * 
- */
+
 class TestCase {
 
 	@Test
@@ -42,6 +40,35 @@ class TestCase {
 	assertEquals(NumberType.ORDINARY, PrimeOrPerfect.analyzeNumber( 4));
 	assertEquals(NumberType.ORDINARY, PrimeOrPerfect.analyzeNumber( 27));
 	assertEquals(NumberType.ORDINARY, PrimeOrPerfect.analyzeNumber(498));
+	}
+	
+	@Test
+	// test getNumber with a valid input.
+	public void getNumberValidInput() {
+		// When the getNumber calls Scanner.nextLine() return "496" via
+		// the mocked Scanner.
+		// declare a mock Scanner object.
+		Scanner mockScanner = mock(Scanner.class);
+		when (mockScanner.nextLine()).thenReturn("496");
+		int val = PrimeOrPerfect.getNumber(mockScanner);
+		assertEquals(496, val);
+	}
+	
+	@Test
+	// test getNumber with invalid inputs followed by a valid input.
+	public void getNumberInvalidInputs() {
+	// getNumber loops until a valid number is entered. So let's
+	// test that behavior.
+	// When the getNumber calls Scanner.nextLine() return "abc" which
+	// is rejected w/ System.err message.
+	// Next Scanner.nextLine() returns "1001" which is rejected since
+	// it is out of range w/ System.err message.
+	// Finally, Scanner.nextLine() returns "496" which it accepts.
+	// declare a mock Scanner object.
+		Scanner mockScanner = mock(Scanner.class);
+		when (mockScanner.nextLine()).thenReturn("abc","1001","-1","496");
+		int val = PrimeOrPerfect.getNumber(mockScanner);
+		assertEquals(496, val);
 	}
 	
 	//@Test
