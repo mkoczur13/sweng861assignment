@@ -1,0 +1,24 @@
+<!-- specifications for displaying the artist data -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deezer API Web Page</title>
+</head>
+<body>
+    <h1>Deezer API Web Page</h1>
+    <form action="/" method="POST">
+        <input type="radio" name="search_type" value="album" checked> Album<br>
+        <input type="radio" name="search_type" value="song"> Song<br>
+        <input type="radio" name="search_type" value="artist"> Artist<br><br>
+        <input type="text" name="query" placeholder="Enter album, song, or artist"><br><br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Clear">
+    </form>
+    <h1>Albums by {{ artist_name }}</h1>
+    <ul>
+    {% for album in albums %}
+        <li>{{ album }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
